@@ -11,11 +11,11 @@ symbol_lst = []
 number_lst = []
 
 for i in range(0, nr_letters):
-    letter_lst.append(pass_makers.letters[random.randint(0, nr_letters - 1)])
+    letter_lst.append(random.choice(pass_makers.letters))
 for i in range(0, nr_symbols):
-    symbol_lst.append(pass_makers.symbols[random.randint(0, nr_symbols - 1)])
+    symbol_lst.append(random.choice(pass_makers.symbols))
 for i in range(0, nr_numbers):
-    number_lst.append(pass_makers.numbers[random.randint(0, nr_numbers - 1)])
+    number_lst.append(random.choice(pass_makers.numbers))
 
 passwd = letter_lst + symbol_lst + number_lst
 random.shuffle(passwd)
