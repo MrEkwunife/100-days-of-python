@@ -2,6 +2,7 @@
 #Step 3
 
 import random
+import os
 word_list = ["aardvark", "baboon", "camel"]
 chosen_word = random.choice(word_list)
 word_length = len(chosen_word)
@@ -18,7 +19,7 @@ for _ in range(word_length):
 
 while ("_" in display):
     guess = input("Guess a letter: ").lower()
-
+    os.system('clear')
     #Check guessed letter
     for position in range(word_length):
         letter = chosen_word[position]
