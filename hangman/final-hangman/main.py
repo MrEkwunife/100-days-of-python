@@ -5,11 +5,11 @@ import hangman_art, hangman_words, os, random, string, time
 print(hangman_art.logo)
 
 get_random_word = random.choice(hangman_words.word_list)
-# print(get_random_word)
+print(get_random_word)
 
 wrng_guess = []
-
 rght_guess = []
+
 for i in get_random_word:
     rght_guess += "_"
 
@@ -35,18 +35,23 @@ while not game_over:
         wrng_guess.append(usr_inp)
 
     print(hangman_art.logo)
-    print("Wrong guess: " + ' '.join(map(str, wrng_guess)))
-    print("Right guess: " + ' '.join(map(str, rght_guess)))
+    print("Wrong guess: ", *wrng_guess)
+    print("Right guess: ", *rght_guess)
     print(hangman_art.stages[lives])
     
     if "_" not in rght_guess:
         print("You win!🥳")
         game_over = True
     
-    if lives <= 0 or time.time() - start_time > 50:
+    elif lives <= 0:
         print("You Lose!🥲")
         print(f"The word is {get_random_word}")
         game_over = True
+    
+    elif time.time() - start_time > 50:
+        print("Time Up....You Lose!🫤")
+        print(f"The word is {get_random_word}")
+        break
 
 
         
