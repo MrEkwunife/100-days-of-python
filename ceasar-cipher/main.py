@@ -1,34 +1,49 @@
-alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+#!/usr/bin/python3
+from art import logo
+import os
 
-direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
-text = input("Type your message:\n")
-shift = int(input("Type the shift number:\n"))
+play_again = True
+while play_again:
+	print(logo)
 
-#TODO-1: Create a function called 'encrypt' that takes the 'text' and 'shift' as inputs.
+	#Ask user to input encode or decode
+	encode_decode = input("Enter 'encode' or 'decode': ").lower()
+	while encode_decode not in ['encode', 'decode']:
+		encode_decode = input("You have to enter 'encode' to encode a text or 'decode' to decode a text: ")
 
-def encrypt(plain_text, shift_tms):
-    encrypted_txt = ""
-    for i in range(0, len(plain_text)):
-        if plain_text[i].islower():
-            num_rep = (ord(plain_text[i]) - ord('a') + shift_tms) % 26
-            encrypted_txt += chr(ord('a') + num_rep)
-        elif plain_text[i].isupper():
-            num_rep = (ord(plain_text[i]) - ord('A') + shift_tms) % 26
-            encrypted_txt += chr(ord('A') + num_rep)
-        else:
-            encrypted_txt += plain_text[i]
-    print(encrypted_txt)
-    #TODO-2: Inside the 'encrypt' function, shift each letter of the 'text' forwards in the alphabet by the shift amount and print the encrypted text.  
-    #e.g. 
-    #plain_text = "hello"
-    #shift = 5
-    #cipher_text = "mjqqt"
-    #print output: "The encoded text is mjqqt"
+	#Ask user to input texts
+	characters = input(f"Input characters to be {encode_decode}d: ")
+	#Ask user to input shits
 
-    ##HINT: How do you get the index of an item in a list:
-    #https://stackoverflow.com/questions/176918/finding-the-index-of-an-item-in-a-list
+	while True:
+		try:
+			shifts = int(input("Enter a shift amount: "))
+			break
+		except ValueError:
+			print("Shift should be an int")
+			
+	def ceasar(ed_char, shift_sp, ed_choice):
+		conv_txt = ""
 
-    ##🐛Bug alert: What happens if you try to encode the word 'civilization'?🐛
+		if ed_choice == "decode":
+			shift_sp *= -1
+			
+		for i in range(0, len(ed_char)):
+			if ed_char[i].islower():
+				conv_txt += chr((ord(ed_char[i]) - ord('a') + shift_sp) % 26 + ord('a'))
+			elif ed_char[i].isupper():
+				conv_txt += chr((ord(ed_char[i]) - ord('A') + shift_sp) % 26 + ord('A'))
+			else:
+				conv_txt += ed_char[i]
 
-#TODO-3: Call the encrypt function and pass in the user inputs. You should be able to test the code and encrypt a message. 
-encrypt(text, shift)
+		print(f"Your {encode_decode}d text is: {conv_txt}")
+
+	ceasar(characters,shifts,encode_decode)
+
+	cont = input("\nEnter yes continue or no to exit: ")
+	while cont not in ['yes', 'no', 'y', 'n']:
+		cont = input("Enter yes or no!: ")
+	if cont == 'n' or cont == 'no':
+		play_again = False
+
+	os.system('clear')
