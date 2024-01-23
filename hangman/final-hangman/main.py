@@ -5,7 +5,7 @@ import hangman_art, hangman_words, os, random, string, time
 print(hangman_art.logo)
 
 get_random_word = random.choice(hangman_words.word_list)
-print(get_random_word)
+# print(get_random_word)
 
 wrng_guess = []
 rght_guess = []
